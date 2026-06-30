@@ -22,15 +22,15 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Quality Clouds Scan
+        uses: qualityclouds/action-full-scan@2.0.0
+        with:
+          mode: cloud
+          token: ${{ secrets.QC_TOKEN }}
+          review: True 
+          allIssues: True 
+          gitHubToken: ${{ secrets.GIT_TOKEN }}
+          pr_fails_on_blockers: True
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
